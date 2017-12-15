@@ -18,6 +18,7 @@ LIB		+= -lcsfml-window -lcsfml-graphics -lcsfml-system -lcsfml-network -lcsfml-a
 LIB		+= -lm
 
 SRCS		= src/main.c
+SRCS		+= src/start_menu.c
 
 OBJ		= $(SRCS:.c=.o)
 

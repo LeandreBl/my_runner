@@ -9,10 +9,12 @@
 
 int	main(void)
 {
-  sprite_t **sprites;
+  window_t *window;
 
-  if (load_script("sprites/script.csfml", "scene", &sprites) == -1)
+  window = init_window(720, 16.0 / 9.0, "runner", sfClose);
+  if (window == NULL)
     return (-1);
-  free_sprites(sprites);
+  start_menu(window);
+  free_window(window);
   return (0);
 }

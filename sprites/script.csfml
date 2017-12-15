@@ -1,7 +1,2 @@
-name : scene
-load > sprites/rayman.png 0,0 50,50
-load > sprites/rayman.png
-
-name : scene principale
-load > sprites/theme.png
-load > sprites/button.png
+name : start menu
+load > sprites/sheet.png 81,48 80,57

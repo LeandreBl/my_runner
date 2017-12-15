@@ -14,4 +14,6 @@
 #include "defines.h"
 #include "colors.h"
 
+int	start_menu(window_t *window);
+
 #endif /* !RUNNER_H_ */
