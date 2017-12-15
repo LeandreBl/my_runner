@@ -1,0 +1,7 @@
+name : scene
+load > sprites/rayman.png 0,0 50,50
+load > sprites/rayman.png
+
+name : scene principale
+load > sprites/theme.png
+load > sprites/button.png
