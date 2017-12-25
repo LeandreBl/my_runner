@@ -11,9 +11,9 @@
 #include "my.h"
 #include "defines.h"
 
-static int	case_digit(const char *dup, int size)
+static int	case_digit(const char *dup, size_t size)
 {
-  int		i;
+  size_t		i;
 
   i = 0;
   while (i < size)
@@ -24,9 +24,9 @@ static int	case_digit(const char *dup, int size)
   return (0);
 }
 
-static int	case_character(const char *dup, int size)
+static int	case_character(const char *dup, size_t size)
 {
-  int		i;
+  size_t		i;
 
   i = 0;
   while (i < size)
@@ -42,7 +42,7 @@ static int	case_character(const char *dup, int size)
   return (0);
 }
 
-int		display_inside(const void *buf, const char *format, int size)
+int		display_inside(const void *buf, const char *format, size_t size)
 {
   const char	*dup;
 

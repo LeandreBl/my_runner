@@ -7,67 +7,15 @@
 
 #include "runner.h"
 
-static int	leave(window_t *window, sfEvent *event, void *data)
-{
-  (void) event;
-  (void) data;
-  sfRenderWindow_close(window->window);
-  return (0);
-}
-
-static int	button_quit(void *data)
-{
-  data_pkt_t	*ptr;
-
-  ptr = (data_pkt_t *)data;
-  return (leave(ptr->window, NULL, NULL));
-}
-
-static int	button_scenario(void *data)
-{
-  data_pkt_t	*ptr;
-
-  ptr = (data_pkt_t *)data;
-  mprintf("scenario\n");
-  (void) ptr;
-  return (0);
-}
-
-static int	button_endless(void *data)
-{
-  data_pkt_t	*ptr;
-
-  ptr = (data_pkt_t *)data;
-  mprintf("Endless\n");
-  (void) ptr;
-  return (0);
-}
-
-static int	buttons_event(window_t *window, sfEvent *event, void *data)
-{
-  data_pkt_t    *ptr;
-
-  ptr = (data_pkt_t *)data;
-  button_poll_event(window, event, ptr->buttons, data);
-  return (0);
-}
-
-static void	init_tab(evtptr_t tab[])
-{
-  add_evt(&tab[0], sfEvtClosed, leave);
-  add_evt(&tab[1], sfEvtMouseButtonPressed, buttons_event);
-	  
-}
-
 static void	display_sky(window_t *window, sprite_t **sprites)
 {
   sfVector2u	size;
   sfVector2f	scale;
 
-  size = sfTexture_getSize(sprites[sky]->texture);
+  size = sfTexture_getSize(sprites[1]->texture);
   scale.x = (double)window->width / size.x;
   scale.y = (double)window->height / size.y;
-  put_sprite_resize(window, sprites[sky], ORIGIN, scale);
+  put_sprite_resize(window, sprites[1], ORIGIN, scale);
 }
 
 static void	display_logo(window_t *window, sprite_t **sprites)
@@ -75,10 +23,10 @@ static void	display_logo(window_t *window, sprite_t **sprites)
   sfVector2u	size;
   sfVector2f	pos;
 
-  size = sfTexture_getSize(sprites[logo]->texture);
+  size = sfTexture_getSize(sprites[0]->texture);
   pos.x = (window->width - size.x) / 2;
   pos.y = window->height / 5;
-  put_sprite(window, sprites[logo], pos);
+  put_sprite(window, sprites[0], pos);
 }
 
 static int	load_buttons(sfbutton_t ***buttons, sprite_t **sprites)
@@ -86,12 +34,12 @@ static int	load_buttons(sfbutton_t ***buttons, sprite_t **sprites)
   *buttons = my_calloc(sizeof(sfbutton_t **) * 4);
   if (*buttons == NULL)
     return (-1);
-  (*buttons)[0] = sfbutton_create("Scenario", sprites[button],
+  (*buttons)[0] = sfbutton_create("Scenario", sprites[2],
 				  ORIGIN, button_scenario);
-  (*buttons)[1] = sfbutton_create("Endless", sprites[button],
+  (*buttons)[1] = sfbutton_create("Endless", sprites[2],
 				  ORIGIN, button_endless);
-  (*buttons)[2] = sfbutton_create("Quit", sprites[button],
-				  ORIGIN, button_quit);
+  (*buttons)[2] = sfbutton_create("Quit", sprites[2],
+				  ORIGIN, button_quit_menu);
   return (0);
 }
 
@@ -113,15 +61,14 @@ static void	display_buttons(window_t *window, sfbutton_t **buttons)
 
 int		start_menu(window_t *window)
 {
-  evtptr_t	tab[2];
+  evtptr_t	tab[3];
   sprite_t	**sprites;
   sfbutton_t	**buttons;
   data_pkt_t	data;
 
-  init_tab(tab);
-  if (load_script("sprites/script.csfml", "start menu", &sprites))
-    return (-1);
-  if (load_buttons(&buttons, sprites) == -1)
+  init_tab_menu(tab);
+  if (load_script("sprites/script.csfml", "start menu", &sprites) == -1 ||
+      load_buttons(&buttons, sprites) == -1)
     return (-1);
   data.window = window;
   data.sprites = sprites;

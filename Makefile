@@ -19,6 +19,10 @@ LIB		+= -lm
 
 SRCS		= src/main.c
 SRCS		+= src/start_menu.c
+SRCS		+= src/function_pointers_tab.c
+SRCS		+= src/scenario.c
+SRCS		+= src/start_menu_buttons.c
+SRCS		+= src/scenario_buttons.c
 
 OBJ		= $(SRCS:.c=.o)
 
@@ -26,7 +30,7 @@ RM		= rm -f
 
 CFLAGS		= -W -Werror -Wall -Wextra
 CFLAGS		+= -I ./include
-CFLAGS		+= -g3
+CFLAGS		+= -g3 -O2
 
 all: $(NAME)
 

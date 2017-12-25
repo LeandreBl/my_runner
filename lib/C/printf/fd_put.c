@@ -12,6 +12,7 @@
 #include <unistd.h>
 
 #include "my.h"
+#include "new_printf.h"
 
 int		fd_putchar(int fd, int c)
 {
@@ -44,25 +45,8 @@ int		fd_putnbr(int fd, int nbr)
 
 int			fd_pointer(int fd, void *ptr)
 {
-  unsigned long long	addr;  
-  static char		*base = "0123456789abcedf";
-  char			*result;
-  int			i;
-
-  addr = (unsigned long long)ptr;
-  i = 0;
-  result = my_calloc(sizeof(char) * 21);
-  if (result == NULL)
-    return (-1);
-  while (addr != 0)
-    {
-      result[i] = base[addr % 16];
-      addr = addr / 16;
-      i = i + 1;
-    }
-  if (fd_putstr(fd, revstr(result)) == -1)
-    return (-1);
-  sfree(&result);
+  fd_putstr(fd, "0x");
+  fd_put_unsigned_int(fd, (long)ptr);
   return (0);
 }
 

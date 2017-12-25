@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Thu Oct 13 09:19:01 2016 Leandre Blanchard
-** Last update Sat Nov  4 03:19:41 2017 Léandre Blanchard
+** Last update Mon Dec 25 02:04:47 2017 Léandre Blanchard
 */
 
 #ifndef MY_H_
@@ -19,6 +19,7 @@ extern "C" {
 }
 #endif
 # include <stddef.h>
+# include <stdbool.h>
 
 /* swap the inside of both values swap(&i, &j) */
 void	swap(void *a, void *b);
@@ -143,7 +144,7 @@ int	sort_tab(char **tabptr);
 ** into an allocated NULL terminated tab
 ** Returns NULL on error
 */
-char	**dir_filenames(const char *dirname, int sort);
+char	**dir_filenames(const char *dirname, bool sort);
 
 /*
 ** Allocate strlen(str) + size bytes,
@@ -184,11 +185,13 @@ int	add_to_clipboard(const char *str);
 */
 int	nb_of(const char *s, char cmp);
 
-/* We'll not talk about this */
+/* my malloc and my free, using only sbrk */
 void	*my_malloc(size_t size);
-
-/* Like really not at all */
-void	free_my(void);
+int	my_free(void *ptr);
+/* free all my_malloc allocated pointers */
+int	my_frees(void);
+/* my_stack gives you the opportunity to see what's inside your my_malloc stack */
+void	my_stack(void);
 
 /* 
 ** Displays the inside of the pointed [buf] memory first [size] bytes
@@ -199,7 +202,7 @@ void	free_my(void);
 ** The display format is [<byte1>][<byte2>][<byte3>] ...
 ** Returns -1 on error
 */
-int	display_inside(const void *buf, const char *format, int size);
+int	display_inside(const void *buf, const char *format, size_t size);
 
 /* Returns the largest strlen(tab[i]) found into the NULL terminated tab */
 int	max_len(char **tabptr);
@@ -256,7 +259,7 @@ int	tab_remove(void *tabptr, int index);
 ** [end] string like end_with("foo.mp3", ".mp3);
 ** Returns 0 if not :)
 */
-int	end_with(const char *s, const char *end);
+bool	end_with(const char *s, const char *end);
 
 /*
 ** Kinda same as my_realloc but with a tab, so you can add

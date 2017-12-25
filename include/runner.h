@@ -8,11 +8,13 @@
 #ifndef RUNNER_H_
 # define RUNNER_H_
 
-#include "csfml.h"
+# include <stdbool.h>
 
-#include "my.h"
-#include "defines.h"
-#include "colors.h"
+# include "csfml.h"
+
+# include "my.h"
+# include "defines.h"
+# include "colors.h"
 
 typedef enum
 {
@@ -28,17 +30,34 @@ typedef enum
   tree,
   moutain,
   sky,
-  logo,
   button,
+  button2,
+  scroll,
 }		sheet_e;
 
 typedef struct	data_pkt_s
 {
+  bool		back;
+  double	offset;
   window_t	*window;
   sfbutton_t	**buttons;
   sprite_t	**sprites;
 }		data_pkt_t;
 
+/* ----------------------------- menu loop -----------------------------*/
+int	leave_menu(window_t *window, sfEvent *event, void *data);
+int	button_quit_menu(void *data);
+int	button_scenario(void *data);
+int	button_endless(void *data);
+int	menu_buttons(window_t *window, sfEvent *event, void *data);
+void	init_tab_menu(evtptr_t tab[]);
 int	start_menu(window_t *window);
+/* ----------------------------- scenario ----------------------------- */
+int	scenario_scroll(window_t *window, sfEvent *event, void *data);
+int	scenario_buttons(window_t *window, sfEvent *event, void *data);
+int	menu_buttons(window_t *window, sfEvent *event, void *data);
+int	leave_scenario(window_t *window, sfEvent *event, void *data);
+void	init_tab_scenario(evtptr_t tab[]);
+int	scenario(window_t *window);
 
 #endif /* !RUNNER_H_ */

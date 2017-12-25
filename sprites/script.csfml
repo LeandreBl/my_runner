@@ -1,4 +1,4 @@
-name : start menu
+name : scenario
 load > sprites/sheet.png 81,48 80,57
 load > sprites/sheet.png 203,49 100,62
 load > sprites/sheet.png 342,46 89,67
@@ -14,6 +14,12 @@ load > sprites/sheet.png 119,432 160,232
 load > sprites/sheet.png 294,468 421,197
 load > sprites/sheet.png 268,724 231,231
 
-load > sprites/runner-logo.png
+load > sprites/button.png
+load > sprites/button-choice.png
+load > sprites/scroll-block.png
 
+name : start menu
+
+load > sprites/runner-logo.png
+load > sprites/sheet.png 268,724 231,231
 load > sprites/button.png
