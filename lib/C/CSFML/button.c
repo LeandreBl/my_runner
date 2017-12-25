@@ -9,7 +9,7 @@
 
 sfbutton_t	*sfbutton_create(const char *name, sprite_t *sprite,
 				 sfVector2f pos,
-				 int (*fction)(void *data))
+				 int (*fction)(void *data, sfbutton_t *this))
 {
   sfbutton_t	*button;
   sfVector2u	size;
@@ -44,7 +44,7 @@ int		sfbutton_exec(sfbutton_t *button, sfVector2i pos, void *data)
   if (sfbutton_ispressed(button, pos))
   {
     if (button->fction != NULL)
-      return (button->fction(data));
+      return (button->fction(data, button));
   }
   return (-1);
 }

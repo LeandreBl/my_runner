@@ -21,3 +21,9 @@ void	init_tab_scenario(evtptr_t tab[])
   add_evt(&tab[2], sfEvtKeyPressed, leave_scenario);
   add_evt(&tab[3], sfEvtMouseWheelScrolled, scenario_scroll);
 }
+
+void	init_tab_ingame(evtptr_t tab[])
+{
+  add_evt(&tab[0], sfEvtClosed, leave_ingame);
+  add_evt(&tab[1], sfEvtKeyPressed, leave_ingame);
+}

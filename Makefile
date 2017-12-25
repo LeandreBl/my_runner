@@ -21,8 +21,11 @@ SRCS		= src/main.c
 SRCS		+= src/start_menu.c
 SRCS		+= src/function_pointers_tab.c
 SRCS		+= src/scenario.c
+SRCS		+= src/init_scenario_buttons.c
 SRCS		+= src/start_menu_buttons.c
 SRCS		+= src/scenario_buttons.c
+SRCS		+= src/ingame_events.c
+SRCS		+= src/start_game.c
 
 OBJ		= $(SRCS:.c=.o)
 

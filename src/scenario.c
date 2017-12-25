@@ -7,47 +7,6 @@
 
 #include "runner.h"
 
-static void	select_files(char **filenames, const char *end)
-{
-  int		i;
-
-  i = 0;
-  while (filenames[i] != NULL)
-  {
-    if (end_with(filenames[i], end) == false)
-    {
-      tab_remove(filenames, i);
-      --i;
-    }
-    else
-      shift_right(filenames[i], my_strlen(end));
-    ++i;
-  }
-}
-
-static int	load_buttons(sfbutton_t ***buttons, sprite_t **sprites)
-{
-  char		**filenames;
-  int		i;
-
-  filenames = dir_filenames(".", true);
-  if (filenames == NULL)
-    return (-1);
-  select_files(filenames, ".ogg");
-  *buttons = my_calloc(sizeof(sfbutton_t *) * (tablen(filenames) + 1));
-  if (*buttons == NULL)
-    return (-1);
-  i = 0;
-  while (filenames[i] != NULL)
-  {
-    (*buttons)[i] = sfbutton_create(filenames[i], sprites[button2],
-				    ORIGIN, NULL);
-    ++i;
-  }
-  free_tab(&filenames);
-  return (0);
-}
-
 static void	scroll_bar(window_t *window, sprite_t **sprites, size_t nb, double offset)
 {
   sfVector2f	scale;
@@ -63,7 +22,7 @@ static void	scroll_bar(window_t *window, sprite_t **sprites, size_t nb, double o
   pos.y = -offset * 42;
   put_sprite_resize(window, sprites[scroll], pos, scale);
   put_word("Select your music to play !",
-	   xy_vectorf(250, 5), window, sfBlack);
+	   xy_vectorf(850, 5), window, sfBlack);
 }
 
 static void	display(window_t *window, sfbutton_t **buttons,
@@ -108,7 +67,7 @@ int		scenario(window_t *window)
 
   init_tab_scenario(tab);
   if (load_script("sprites/script.csfml", "scenario", &sprites) == -1 ||
-      load_buttons(&buttons, sprites) == -1)
+      load_scenario_buttons(&buttons, sprites) == -1)
     return (-1);
   init_data(&data, window, sprites, buttons);
   while (sfRenderWindow_isOpen(window->window) && data.back != true)

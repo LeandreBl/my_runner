@@ -17,29 +17,32 @@ int		leave_menu(window_t *window, sfEvent *event, void *data)
   return (0);
 }
 
-int		button_quit_menu(void *data)
+int		button_quit_menu(void *data, sfbutton_t *this)
 {
   data_pkt_t	*ptr;
 
+  (void) this;
   ptr = (data_pkt_t *)data;
   return (leave_menu(ptr->window, NULL, NULL));
 }
 
-int		button_scenario(void *data)
+int		button_scenario(void *data, sfbutton_t *this)
 {
   data_pkt_t	*ptr;
 
+  (void) this;
   ptr = (data_pkt_t *)data;
   scenario(ptr->window);
   return (0);
 }
 
-int		button_endless(void *data)
+int		button_endless(void *data, sfbutton_t *this)
 {
   data_pkt_t	*ptr;
 
   ptr = (data_pkt_t *)data;
   mprintf("Endless\n");
+  (void) this;
   (void) ptr;
   return (0);
 }
