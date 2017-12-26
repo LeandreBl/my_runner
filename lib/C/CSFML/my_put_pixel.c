@@ -37,12 +37,9 @@ static void	swaper(sfVector2f *from, sfVector2f *to)
 {
   sfVector2f    swp;
 
-  if (from->x > to->x)
-    {
-      swp = *from;
-      *from = *to;
-      *to = swp;
-    }
+  swp = *from;
+  *from = *to;
+  *to = swp;
 }
 /*
 ** Draw a line from "from" to "to" with sfColor "color"
@@ -50,20 +47,29 @@ static void	swaper(sfVector2f *from, sfVector2f *to)
 void		my_draw_line(window_t *window, sfVector2f from,
 			     sfVector2f to, sfColor color)
 {
-  sfVector2f    xy;
   float         a;
   float         b;
 
-  swaper(&from, &to);
+  if (from.y > to.y)
+    swaper(&from, &to);
+  while (from.x == to.x && from.y <= to.y)
+    my_put_pixel(window, (int)from.x, (int)from.y++, color);
+  if (from.x > to.x)
+    swaper(&from, &to);
+  while (from.y == to.y && from.x <= to.x)
+    my_put_pixel(window, (int)from.x++, (int)from.y, color);
   a = (to.y - from.y) / (to.x - from.x);
   b = from.y - (a * from.x);
-  xy.x = from.x;
-  while (xy.x < to.x)
-    {
-      xy.y = a * xy.x + b;
-      my_put_pixel(window, (int)xy.x, (int)xy.y, color);
-      xy.x += 0.2;
-    }
-  while (xy.x < to.x && to.y == from.y)
-    my_put_pixel(window, (int)xy.x, (int)xy.y++, color);
+  while ((a <= 0.5 || a >= -0.5) && from.x <= to.x)
+  {
+    from.y = a * from.x + b;
+    my_put_pixel(window, (int)from.x, (int)from.y, color);
+    from.x += 0.2;
+  }
+  while ((a >= 0.5 || a <= -0.5) && from.y <= to.y)
+  {
+    from.x = a * from.x + b;
+    my_put_pixel(window, (int)from.x, (int)from.y, color);
+    from.y += 0.2;
+  }
 }

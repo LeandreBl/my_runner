@@ -13,7 +13,7 @@ int		scenario_scroll(window_t *window, sfEvent *event, void *data)
   data_pkt_t	*ptr;
 
   ptr = (data_pkt_t *)data;
-  value = (double)event->mouseWheelScroll.delta / 5;
+  value = (double)event->mouseWheelScroll.delta / 4;
   if (ptr->offset + value <= 0
       && (50 + (50.0 * (ptr->offset + value) + (tablen(ptr->buttons) - 1)
 		* 70)) >= window->height - 120)

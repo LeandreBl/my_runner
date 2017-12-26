@@ -26,4 +26,5 @@ void	init_tab_ingame(evtptr_t tab[])
 {
   add_evt(&tab[0], sfEvtClosed, leave_ingame);
   add_evt(&tab[1], sfEvtKeyPressed, leave_ingame);
+  add_evt(&tab[2], sfEvtMouseButtonPressed, play_button);
 }

@@ -24,8 +24,11 @@ SRCS		+= src/scenario.c
 SRCS		+= src/init_scenario_buttons.c
 SRCS		+= src/start_menu_buttons.c
 SRCS		+= src/scenario_buttons.c
-SRCS		+= src/ingame_events.c
+SRCS		+= src/start_game_events.c
 SRCS		+= src/start_game.c
+SRCS		+= src/generate_map_from_sound.c
+SRCS		+= src/display_fctions.c
+SRCS		+= src/runner.c
 
 OBJ		= $(SRCS:.c=.o)
 

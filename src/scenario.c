@@ -29,15 +29,10 @@ static void	display(window_t *window, sfbutton_t **buttons,
 			sprite_t **sprites, double offset)
 {
   int		i;
-  sfVector2u    size;
-  sfVector2f    scale;
   sfVector2f	pos;
 
   i = 0;
-  size = sfTexture_getSize(sprites[sky]->texture);
-  scale.x = (double)window->width / size.x;
-  scale.y = (double)window->height / size.y;
-  put_sprite_resize(window, sprites[sky], ORIGIN, scale);
+  display_sky(window, sprites[sky]);
   pos.x = 50;
   while (buttons[i] != NULL)
   {
