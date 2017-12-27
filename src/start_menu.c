@@ -7,17 +7,6 @@
 
 #include "runner.h"
 
-static void	display_sky(window_t *window, sprite_t **sprites)
-{
-  sfVector2u	size;
-  sfVector2f	scale;
-
-  size = sfTexture_getSize(sprites[1]->texture);
-  scale.x = (double)window->width / size.x;
-  scale.y = (double)window->height / size.y;
-  put_sprite_resize(window, sprites[1], ORIGIN, scale);
-}
-
 static void	display_logo(window_t *window, sprite_t **sprites)
 {
   sfVector2u	size;
@@ -77,7 +66,7 @@ int		start_menu(window_t *window)
   {
     window_clear(window);
     ptr_pollevent(window, tab, sizeof(tab) / sizeof(*tab), &data);
-    display_sky(window, sprites);
+    display_sky(window, sprites[1]);
     display_logo(window, sprites);
     display_buttons(window, buttons);
     window_refresh(window);
