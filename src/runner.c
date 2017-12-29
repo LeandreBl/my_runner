@@ -7,15 +7,19 @@
 
 #include "runner.h"
 
-static int	game(game_t *data)
+static int	game(game_t *game)
 {
-  while (sfRenderWindow_isOpen(data->window->window)
-	 && data->leave == false)
+  evtptr_t	tab[4];
+
+  init_tab_runner(tab);
+  while (sfRenderWindow_isOpen(game->window->window)
+	 && game->leave == false)
   {
-    window_clear(data->window);
-    if (KP(sfKeyEscape))
-      data->leave = true;
-    window_refresh(data->window);
+    window_clear(game->window);
+    ptr_pollevent(game->window, tab, sizeof(tab) / sizeof(*tab), game);
+    runner_move(game);
+    display_runner(game);
+    window_refresh(game->window);
   }
   return (0);
 }
@@ -35,6 +39,7 @@ int		runner(void *data, sfbutton_t *this)
   data_block.player.pos = xy_vectorf(0, tablen(ptr->map) - 1);
   data_block.player.type = 0;
   data_block.player.rotation = 0;
+  data_block.player.speed = DEFAULT_SPEED;
   data_block.leave = false;
   return (game(&data_block));
 }

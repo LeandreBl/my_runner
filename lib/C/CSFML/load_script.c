@@ -135,6 +135,8 @@ int             load_script(const char *pathname, const char *script, sprite_t *
   int   nb;
 
   file = load_file(pathname);
+  mprintf("[%sInfo%s] Loading script %s\"%s\"%s\n",
+	  YELLOW, RESET, GREEN, script, RESET);
   if (file == NULL)
   {
     mdprintf(2, CSFML_ERR "[%sError%s] cannot open <%s> script\n",

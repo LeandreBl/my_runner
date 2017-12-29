@@ -28,3 +28,11 @@ void	init_tab_ingame(evtptr_t tab[])
   add_evt(&tab[1], sfEvtKeyPressed, leave_ingame);
   add_evt(&tab[2], sfEvtMouseButtonPressed, play_button);
 }
+
+void	init_tab_runner(evtptr_t tab[])
+{
+  add_evt(&tab[0], sfEvtClosed, leave_runner);
+  add_evt(&tab[1], sfEvtKeyPressed, leave_runner);
+  add_evt(&tab[2], sfEvtMouseButtonPressed, runner_button_handler);
+  add_evt(&tab[3], sfEvtKeyPressed, runner_jump);
+}

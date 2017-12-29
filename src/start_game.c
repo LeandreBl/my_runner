@@ -17,6 +17,23 @@ static void	fill_data(data_pkt_t *data, window_t *window, sprite_t **sprites,
   data->back = false;
 }
 
+static void	player_preview(window_t *window, sprite_t **sprites)
+{
+  sfVector2u    size;
+  sfVector2u    match;
+  sfVector2f    scale;
+  sfVector2f    pos;
+  
+  size = sfTexture_getSize(sprites[player]->texture);
+  match = sfTexture_getSize(sprites[cube1]->texture);
+  scale.x = (float)match.x / (float)size.x;
+  scale.y = (float)match.y / (float)size.y;
+  pos.x = 50;
+  pos.y = window->height - match.y * 1.47;
+  put_sprite_resize(window, sprites[player],
+		    pos, scale);
+}				 
+
 static void	display(window_t *window, sprite_t **sprites,
 			char **map, sfbutton_t *play)
 {
@@ -37,7 +54,7 @@ static void	display(window_t *window, sprite_t **sprites,
       {
 	size = sfTexture_getSize(sprites[(int)map[i][j]]->texture);
 	pos.x = size.x * j;
-	pos.y = window->height - size.y * (tablen(map) - i) + size.y / 2;
+	pos.y = i * size.y + tablen(map) - 1 - size.y * 1.2;
 	if (pos.x > window->width)
 	  break;
 	put_sprite(window, sprites[(int)map[i][j]], pos);
@@ -49,6 +66,7 @@ static void	display(window_t *window, sprite_t **sprites,
   sfbutton_draw_name(window, play, xy_vectorf(window->width / 2 - 80,
 					      window->height / 2 - 20),
 		     sfWhite);
+  player_preview(window, sprites);
 }
 
 static void	ingame(window_t *window, sprite_t **sprites,
@@ -63,23 +81,22 @@ static void	ingame(window_t *window, sprite_t **sprites,
   map = generate_from_soundbuffer(buffer);
   if (map == NULL)
     return;
-  data.map = map;
-  data.music = music;
   play = sfbutton_create("play !", sprites[button],
 			 ORIGIN, runner);
   fill_data(&data, window, sprites, &play);
+  data.map = map;
+  data.music = music;
   while (sfRenderWindow_isOpen(window->window) &&
 	 data.back == false)
   {
     window_clear(window);
-    clear_white(window);
     ptr_pollevent(window, tab, sizeof(tab) / sizeof(*tab), &data);
     display(window, sprites, map, play);
     if (data.back == false)
       window_refresh(window);
   }
-  clear_white(window);
   sfMusic_stop(music);
+  free_tab(&map);
 }
 
 void		start_game(void *data, const char *filename)

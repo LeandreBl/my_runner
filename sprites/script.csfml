@@ -18,6 +18,8 @@ load > sprites/button.png
 load > sprites/button-choice.png
 load > sprites/scroll-block.png
 
+load > sprites/player.png
+
 name : start menu
 
 load > sprites/runner-logo.png

@@ -8,16 +8,18 @@
 ** Last update Sun Apr 30 17:27:20 2017 Léandre Blanchard
 */
 
-#include <stdlib.h>
+#include <stddef.h>
 
-int		zeros(char *ptr, int size)
+int		zeros(void *ptr, size_t size)
 {
-  int		i;
+  char		*p;
+  size_t	i;
 
   i = 0;
-  if (ptr == NULL)
+  p = ptr;
+  if (p == NULL)
     return (-1);
   while (i < size)
-    ptr[i++] = 0;
+    p[i++] = 0;
   return (0);
 }

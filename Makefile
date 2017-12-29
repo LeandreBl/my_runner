@@ -48,13 +48,9 @@ $(NAME): $(OBJ)
 	@       tput setaf 2; cat include/signature; tput sgr0
 
 clean:
-	$(MAKE) lib/C clean
-	$(MAKE) lib/C/CSFML clean
 	$(RM) $(OBJ)
 
 fclean: clean
-	$(MAKE) lib/C fclean
-	$(MAKE) lib/C/CSFML fclean
 	$(RM) $(NAME)
 
 re: fclean all

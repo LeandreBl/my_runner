@@ -49,11 +49,11 @@ static void	fill_map(char **map, int len,
   empty(map, len);
   while (i < len)
   {
-    if (ABS(samples[i * offset]) > 5000)
+    if (ABS(samples[i * offset]) > 10000)
       build_jump(map, i, 3);
-    else if (ABS(samples[i * offset]) > 3000)
+    else if (ABS(samples[i * offset]) > 6000)
       build_jump(map, i, 2);
-    else if (ABS(samples[i * offset]) > 500)
+    else if (ABS(samples[i * offset]) > 1000)
       build_jump(map, i, 1);
     ++i;
   }
@@ -69,7 +69,7 @@ char		**generate_from_soundbuffer(sfSoundBuffer *buffer)
 
   samples = sfSoundBuffer_getSamples(buffer);
   count = sfSoundBuffer_getSampleCount(buffer);
-  offset = sfSoundBuffer_getSampleRate(buffer);
+  offset = sfSoundBuffer_getSampleRate(buffer) / 2;
   len = count / offset;
   map = my_alloc_tab(10, len);
   if (map == NULL)

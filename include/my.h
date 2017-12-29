@@ -20,6 +20,26 @@ extern "C" {
 #endif
 # include <stddef.h>
 # include <stdbool.h>
+# include <stdint.h>
+
+/*
+** Return a server socket on port <port>
+** Returns -1 on error
+*/
+int	create_server(uint16_t port);
+
+/*
+** Return a socket when a new client is connected, <sockfd> is the server fd
+** <backlog> argument defines the length of the kernel pending queue
+** Returns -1 on error
+*/
+int	accept_client(int sockfd, int backlog);
+
+/*
+** Try to connect to the server <ip> on <port> and return a client socket
+** Return -1 on error
+*/
+int	connect_to(const char *ip, uint16_t port);
 
 /* swap the inside of both values swap(&i, &j) */
 void	swap(void *a, void *b);
@@ -29,7 +49,7 @@ void	my_memset(void *ptr, int value, size_t size);
 
 /*
 ** Isacmd returns 1 if the cmd exist in $PATH
-** return 0 if not or on error
+** return 0 otherwise
 */
 int	isacmd(const char *str);
 
@@ -370,7 +390,7 @@ int	total_name(const char *);
 /*
 ** Man 3 bzero
 */
-int	zeros(char *, int);
+int	zeros(void *ptr, size_t size);
 
 void	my_putchar(char);
 

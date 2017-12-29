@@ -17,6 +17,15 @@
 # include "defines.h"
 # include "colors.h"
 
+# define WW		(game->window->width)
+# define WH		(game->window->height)
+# define WW2		(WW / 2)
+# define WH2		(WH / 2)
+
+# define DEFAULT_SPEED	(0.06)
+
+# define GRAVITY_SCALE	(1.0001)
+
 typedef enum
 {
   cloud1,
@@ -34,6 +43,7 @@ typedef enum
   button,
   button2,
   scroll,
+  player
 }		sheet_e;
 
 typedef struct	data_pkt_s
@@ -49,9 +59,11 @@ typedef struct	data_pkt_s
 
 typedef struct	player_s
 {
+  float		speed;
   sfVector2f	pos;
   uint8_t	type;
   float		rotation;
+  float		gravity;
 }		player_t;
 
 typedef struct	game_s
@@ -90,7 +102,11 @@ int	leave_ingame(window_t *window, sfEvent *event, void *data);
 void	init_tab_ingame(evtptr_t tab[]);
 void	start_game(void *data, const char *filename);
 /* ----------------------------- runner ------------------------------- */
+void	init_tab_runner(evtptr_t tab[]);
+void	display_player(game_t *game);
 void	display_runner(game_t *game);
+int	runner_jump(window_t *window, sfEvent *event, void *data);
+void	runner_move(game_t *game);
 int	runner_button_handler(window_t *window, sfEvent *event, void *data);
 int	leave_runner(window_t *window, sfEvent *event, void *data);
 int	runner(void *data, sfbutton_t *this);
