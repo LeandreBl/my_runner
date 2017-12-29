@@ -17,6 +17,7 @@ int		play_button(window_t *window, sfEvent *event, void *data)
   pos.x = event->mouseButton.x;
   pos.y = event->mouseButton.y;
   sfbutton_exec(*(pkt->buttons), pos, data);
+  pkt->back = true;
   return (0);
 }
 

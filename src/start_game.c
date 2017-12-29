@@ -63,6 +63,8 @@ static void	ingame(window_t *window, sprite_t **sprites,
   map = generate_from_soundbuffer(buffer);
   if (map == NULL)
     return;
+  data.map = map;
+  data.music = music;
   play = sfbutton_create("play !", sprites[button],
 			 ORIGIN, runner);
   fill_data(&data, window, sprites, &play);
@@ -73,7 +75,8 @@ static void	ingame(window_t *window, sprite_t **sprites,
     clear_white(window);
     ptr_pollevent(window, tab, sizeof(tab) / sizeof(*tab), &data);
     display(window, sprites, map, play);
-    window_refresh(window);
+    if (data.back == false)
+      window_refresh(window);
   }
   clear_white(window);
   sfMusic_stop(music);

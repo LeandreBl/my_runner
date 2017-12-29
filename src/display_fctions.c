@@ -17,3 +17,8 @@ void		display_sky(window_t *window, sprite_t *sprite)
   scale.y = (double)window->height / size.y;
   put_sprite_resize(window, sprite, ORIGIN, scale);
 }
+
+void		display_runner(game_t *game)
+{
+  (void) game;
+}

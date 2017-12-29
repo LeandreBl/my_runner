@@ -29,6 +29,7 @@ SRCS		+= src/start_game.c
 SRCS		+= src/generate_map_from_sound.c
 SRCS		+= src/display_fctions.c
 SRCS		+= src/runner.c
+SRCS		+= src/runner_events.c
 
 OBJ		= $(SRCS:.c=.o)
 

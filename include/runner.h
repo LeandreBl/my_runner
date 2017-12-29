@@ -9,6 +9,7 @@
 # define RUNNER_H_
 
 # include <stdbool.h>
+# include <stdint.h>
 
 # include "csfml.h"
 
@@ -42,7 +43,27 @@ typedef struct	data_pkt_s
   window_t	*window;
   sfbutton_t	**buttons;
   sprite_t	**sprites;
+  sfMusic	*music;
+  char		**map;
 }		data_pkt_t;
+
+typedef struct	player_s
+{
+  sfVector2f	pos;
+  uint8_t	type;
+  float		rotation;
+}		player_t;
+
+typedef struct	game_s
+{
+  player_t	player;
+  window_t	*window;
+  char		**map;
+  sfMusic	*music;
+  sprite_t	**sprites;
+  sfbutton_t	**buttons;
+  bool		leave;
+}		game_t;
 
 /* --------------------------- @a functions --------------------------- */
 void	display_sky(window_t *window, sprite_t *sprite);
@@ -69,5 +90,8 @@ int	leave_ingame(window_t *window, sfEvent *event, void *data);
 void	init_tab_ingame(evtptr_t tab[]);
 void	start_game(void *data, const char *filename);
 /* ----------------------------- runner ------------------------------- */
+void	display_runner(game_t *game);
+int	runner_button_handler(window_t *window, sfEvent *event, void *data);
+int	leave_runner(window_t *window, sfEvent *event, void *data);
 int	runner(void *data, sfbutton_t *this);
 #endif /* !RUNNER_H_ */
