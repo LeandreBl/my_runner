@@ -5,7 +5,7 @@
 ** Login   <lblanchard@epitech.net>
 ** 
 ** Started on  Thu Oct 13 09:19:01 2016 Leandre Blanchard
-** Last update Mon Dec 25 02:04:47 2017 Léandre Blanchard
+** Last update Sat Dec 30 00:39:02 2017 Léandre Blanchard
 */
 
 #ifndef MY_H_
@@ -152,6 +152,14 @@ int	my_dprintf(int fd, const char *format, ...);
 ** Returns NULL on error
 */
 char	*catalloc(const char *format, ...);
+
+/*
+** scatalloc store the result in dest, if dest is NULL, it uses catalloc and returns 
+** a pointer to the new allocated string.
+** if dest is a valid pointer, this function return dest
+** Returns NULL on error
+*/
+char	*scatalloc(char *dest, const char *format, ...);
 
 /* 
 ** Sort the given [tab] in ascending order using strcmp

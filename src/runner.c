@@ -7,11 +7,17 @@
 
 #include "runner.h"
 
+static void	display(game_t *game)
+{
+  (void) game;
+}
+
 static int	game(game_t *game)
 {
   evtptr_t	tab[4];
 
   init_tab_runner(tab);
+  sfMusic_play(game->music);
   while (sfRenderWindow_isOpen(game->window->window)
 	 && game->leave == false)
   {
@@ -19,6 +25,7 @@ static int	game(game_t *game)
     ptr_pollevent(game->window, tab, sizeof(tab) / sizeof(*tab), game);
     runner_move(game);
     display_runner(game);
+    display(game);
     window_refresh(game->window);
   }
   return (0);

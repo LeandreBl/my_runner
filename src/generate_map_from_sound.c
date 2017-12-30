@@ -28,16 +28,8 @@ static void	empty(char **map, int len)
 
 static void	build_jump(char **map, int pos, int height)
 {
-  int		i;
-  int		size;
-
-  i = 0;
-  size = tablen(map);
-  while (i < height)
-  {
-    map[size - 2 - i][pos] = cube1;
-    ++i;
-  }
+  map[tablen(map) - 1][pos] = ' ';
+  map[tablen(map) - 2 - height][pos] = cube1;
 }
 
 static void	fill_map(char **map, int len,
@@ -69,7 +61,7 @@ char		**generate_from_soundbuffer(sfSoundBuffer *buffer)
 
   samples = sfSoundBuffer_getSamples(buffer);
   count = sfSoundBuffer_getSampleCount(buffer);
-  offset = sfSoundBuffer_getSampleRate(buffer) / 2;
+  offset = sfSoundBuffer_getSampleRate(buffer) / 1.8;
   len = count / offset;
   map = my_alloc_tab(10, len);
   if (map == NULL)

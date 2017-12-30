@@ -30,19 +30,10 @@ int		runner_button_handler(window_t *window, sfEvent *event, void *data)
 
 void		runner_move(game_t *game)
 {
-  volatile  sfVector2i	pos;
-
-  //hitbox = sfTexture_getSize(game->sprites[cube1]->texture);
   game->player.pos.x += game->player.speed;
-  pos.y = (int)(game->player.pos.y - game->player.gravity);
-  pos.x = (int)game->player.pos.x + 0.5;
-  if (pos.y < ((int)tablen(game->map) - 1) && pos.y > 0)
-  {
-    if (game->map[pos.y][pos.x] == ' ')
-    {
-      game->player.pos.y -= game->player.gravity;
-    }
-  }
+  game->player.pos.y -= game->player.gravity;
+  if (game->player.pos.y >= tablen(game->map) - 1)
+    game->player.pos.y = tablen(game->map) - 1;
   game->player.gravity -= 0.02;
 }
 

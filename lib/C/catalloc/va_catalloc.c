@@ -45,3 +45,14 @@ char			*va_catalloc(const char *format, va_list *va)
   catalloc_gesture(format, va, fctions, str);
   return (str);
 }
+
+void			va_scatalloc(char *dest, const char *format, va_list *va)
+{
+  static ptr_fction_t   fctions[NB_FCTION];
+  static int            called = 0;
+
+  if (called == 0)
+    tab_create(fctions);
+  called++;
+  catalloc_gesture(format, va, fctions, dest);
+}

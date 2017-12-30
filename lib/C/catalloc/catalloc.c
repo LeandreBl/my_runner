@@ -20,3 +20,18 @@ char		*catalloc(const char *format, ...)
   va_end(va);
   return (str);
 }
+
+char		*scatalloc(char *dest, const char *format, ...)
+{
+  va_list	va;
+
+  if (format == NULL)
+    return (NULL);
+  va_start(va, format);
+  if (dest == NULL)
+    dest = va_catalloc(format, &va);
+  else
+    va_scatalloc(dest, format, &va);
+  va_end(va);
+  return (dest);
+}

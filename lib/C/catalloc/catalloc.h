@@ -25,6 +25,7 @@ int	lenframe(const char *str);
 void	catalloc_gesture(const char *format, va_list *va,
 			 ptr_fction_t fctions[], char *str);
 char	*va_catalloc(const char *format, va_list *va);
+void	va_scatalloc(char *dest, const char *format, va_list *va);
 int	total_alloc(const char *format, va_list *new,
 		    ptr_fction_t fctions[]);
 /* functions used to add into str */

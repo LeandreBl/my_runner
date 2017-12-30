@@ -51,6 +51,8 @@ void		display_runner(game_t *game)
     while (game->map[i][j] != 0)
     {
       real.x = j * size.x - game->player.pos.x * size.x;
+      if (real.x > WW)
+	break;
       real.y = i * size.y - size.y * 1.2;
       if (game->map[i][j] != ' ')
 	put_sprite(game->window, game->sprites[(int)game->map[i][j]], real);
