@@ -44,8 +44,6 @@ int		runner_jump(window_t *window, sfEvent *event, void *data)
   (void) window;
   game = (game_t *)data;
   if (event->key.code == sfKeySpace || event->key.code == sfKeyUp)
-  {
     game->player.gravity = 0.4;
-  }
   return (0);
 }
