@@ -80,6 +80,7 @@ typedef struct	game_s
 /* --------------------------- @a functions --------------------------- */
 void	display_sky(window_t *window, sprite_t *sprite);
 char	**generate_from_soundbuffer(sfSoundBuffer *buffer);
+char	get_block(game_t *game, sfVector2f pos);
 /* ----------------------------- menu loop ---------------------------- */
 int	leave_menu(window_t *window, sfEvent *event, void *data);
 int	button_quit_menu(void *data, sfbutton_t *this);
@@ -102,6 +103,8 @@ int	leave_ingame(window_t *window, sfEvent *event, void *data);
 void	init_tab_ingame(evtptr_t tab[]);
 void	start_game(void *data, const char *filename);
 /* ----------------------------- runner ------------------------------- */
+bool	can_jump(game_t *game);
+bool	can_fall(game_t *game);
 void	init_tab_runner(evtptr_t tab[]);
 void	display_player(game_t *game);
 void	display_runner(game_t *game);
